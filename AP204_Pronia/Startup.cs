@@ -27,7 +27,8 @@ namespace AP204_Pronia
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<AppDbContext>(opt=> {
+            services.AddDbContext<AppDbContext>(opt =>
+            {
                 opt.UseSqlServer(_configuration.GetConnectionString("Default"));
             });
         }
@@ -45,6 +46,11 @@ namespace AP204_Pronia
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=dashboard}/{action=index}/{id?}"
+                );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=home}/{action=index}"

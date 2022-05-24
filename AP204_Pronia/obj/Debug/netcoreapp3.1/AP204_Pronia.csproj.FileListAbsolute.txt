@@ -145,3 +145,8 @@ C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\bin\Debug\netcoreapp3.1\r
 C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\obj\Debug\netcoreapp3.1\Razor\Areas\ProniaAdmin\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\obj\Debug\netcoreapp3.1\Razor\Areas\ProniaAdmin\Views\_ViewStart.cshtml.g.cs
+C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\obj\Debug\netcoreapp3.1\Razor\Areas\ProniaAdmin\Views\Dashboard\Index.cshtml.g.cs
+C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\obj\Debug\netcoreapp3.1\Razor\Areas\ProniaAdmin\Views\Size\Index.cshtml.g.cs
+C:\Users\Lenovo\source\repos\AP204_Pronia\AP204_Pronia\obj\Debug\netcoreapp3.1\Razor\Areas\ProniaAdmin\Views\_ViewImports.cshtml.g.cs

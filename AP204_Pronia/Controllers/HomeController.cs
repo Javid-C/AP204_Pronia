@@ -1,6 +1,8 @@
 ﻿using AP204_Pronia.DAL;
 using AP204_Pronia.Models;
+using AP204_Pronia.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,14 @@ namespace AP204_Pronia.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Slider> sliders = _context.Sliders.ToList();
-            return View(sliders);
+            HomeVM model = new HomeVM
+            {
+                Sliders = await _context.Sliders.ToListAsync(),
+                Plants = await _context.Plants.Include(p=>p.PlantImages).ToListAsync()
+            };
+            return View(model);
         }
     }
 }
