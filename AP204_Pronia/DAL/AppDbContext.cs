@@ -14,6 +14,17 @@ namespace AP204_Pronia.DAL
 
         }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Size>(entity =>
+            {
+                // Set key for entity
+                entity.HasKey(s => s.Id);
+            });
+
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Plant> Plants { get; set; }
         public DbSet<Size> Sizes { get; set; }

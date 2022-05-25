@@ -26,20 +26,69 @@ namespace AP204_Pronia.Areas.ProniaAdmin.Controllers
 
         public IActionResult Create()
         {
-            return Json("Create");
+            return View();
         }
-        public IActionResult Detail(int id)
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Size size)
         {
-            return Json(id);
+            if (!ModelState.IsValid) return View();
+
+            await _context.Sizes.AddAsync(size);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
-        public IActionResult Edit(int id)
+
+        public async Task<IActionResult> Detail(int id)
         {
-            return Json(id);
+            Size size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (size == null) return NotFound();
+            return View(size);
         }
-        
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return Json(id);
+            Size size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (size == null) return NotFound();
+            return View(size);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Edit(int id, Size size)
+        {
+
+            Size existedSize = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (existedSize == null) return NotFound();
+            if (id != size.Id) return BadRequest();
+
+            existedSize.Name = size.Name;
+
+            //_context.Sizes.Update(size);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            Size size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (size == null) return NotFound();
+            return View(size);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteSize(int id)
+        {
+            Size size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
+            if (size == null) return NotFound();
+
+            _context.Sizes.Remove(size);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
