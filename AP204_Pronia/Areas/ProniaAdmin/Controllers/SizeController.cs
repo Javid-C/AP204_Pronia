@@ -62,9 +62,9 @@ namespace AP204_Pronia.Areas.ProniaAdmin.Controllers
             if (existedSize == null) return NotFound();
             if (id != size.Id) return BadRequest();
 
-            existedSize.Name = size.Name;
-
+            //existedSize.Name = size.Name;
             //_context.Sizes.Update(size);
+            _context.Entry(existedSize).CurrentValues.SetValues(size);
 
             await _context.SaveChangesAsync();
 

@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20220524113453_test.Designer.cs" />
     <Compile Remove="Migrations\20220524113812_createdPlantAndColorAndSizeAndPlantImageTables.cs" />
     <Compile Remove="Migrations\20220524113812_createdPlantAndColorAndSizeAndPlantImageTables.Designer.cs" />
+    <Compile Remove="Migrations\20220526110427_addDataAnnotationsToSliders.cs" />
+    <Compile Remove="Migrations\20220526110427_addDataAnnotationsToSliders.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

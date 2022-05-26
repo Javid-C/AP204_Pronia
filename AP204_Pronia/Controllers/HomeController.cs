@@ -22,7 +22,7 @@ namespace AP204_Pronia.Controllers
         {
             HomeVM model = new HomeVM
             {
-                Sliders = await _context.Sliders.ToListAsync(),
+                Sliders = await _context.Sliders.OrderBy(s=>s.Order).Take(3).ToListAsync(),
                 Plants = await _context.Plants.Include(p=>p.PlantImages).ToListAsync()
             };
             return View(model);
