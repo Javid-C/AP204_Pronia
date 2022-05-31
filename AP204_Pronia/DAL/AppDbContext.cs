@@ -14,6 +14,13 @@ namespace AP204_Pronia.DAL
 
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<AnotherSetting>()
+                .HasIndex(u => u.Key)
+                .IsUnique();
+        }
+
 
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Plant> Plants { get; set; }
@@ -22,5 +29,8 @@ namespace AP204_Pronia.DAL
         public DbSet<PlantImage> PlantImages { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<PlantCategory> PlantCategories{ get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<AnotherSetting> AnotherSettings { get; set; }
     }
 }

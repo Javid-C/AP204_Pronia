@@ -10,5 +10,6 @@ namespace AP204_Pronia.ViewModels
     {
         public List<Slider> Sliders { get; set; }
         public List<Plant> Plants { get; set; }
+        public Setting Settings { get; set; }
     }
 }

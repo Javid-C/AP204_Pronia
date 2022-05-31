@@ -1,4 +1,5 @@
 using AP204_Pronia.DAL;
+using AP204_Pronia.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,8 @@ namespace AP204_Pronia
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<LayoutService>();
+
             services.AddControllersWithViews();
 
             services.AddDbContext<AppDbContext>(opt =>

@@ -22,8 +22,9 @@ namespace AP204_Pronia.Controllers
         {
             HomeVM model = new HomeVM
             {
-                Sliders = await _context.Sliders.OrderBy(s=>s.Order).Take(3).ToListAsync(),
-                Plants = await _context.Plants.Include(p=>p.PlantImages).ToListAsync()
+                Sliders = await _context.Sliders.OrderBy(s => s.Order).Take(3).ToListAsync(),
+                Plants = await _context.Plants.Include(p => p.PlantImages).ToListAsync(),
+                Settings = await _context.Settings.FirstOrDefaultAsync()
             };
             return View(model);
         }
@@ -32,7 +33,6 @@ namespace AP204_Pronia.Controllers
         {
             List<Plant> plants = await _context.Plants.Include(p => p.PlantImages).ToListAsync();
             return PartialView("_ProductPartialView", plants);
-
         }
     }
 }
