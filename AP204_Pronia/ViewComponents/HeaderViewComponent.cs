@@ -21,9 +21,9 @@ namespace AP204_Pronia.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             Setting setting = await _context.Settings.FirstOrDefaultAsync();
-            List<AnotherSetting> anotherSetting = await _context.AnotherSettings.ToListAsync();
+            //List<AnotherSetting> anotherSetting = await _context.AnotherSettings.ToListAsync();
             
-            return View(anotherSetting);
+            return View(setting);
         }
 
     }

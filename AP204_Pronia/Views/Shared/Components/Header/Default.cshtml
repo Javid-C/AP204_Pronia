@@ -1,6 +1,6 @@
-﻿@*@model Setting*@ 
+﻿@model Setting 
 
-@*<header class="main-header-area">
+<header class="main-header-area">
     <div class="header-top bg-pronia-primary d-none d-lg-block">
         <div class="container">
             <div class="row align-items-center">
@@ -851,10 +851,10 @@
         </div>
     </div>
     <div class="global-overlay"></div>
-</header>*@
+</header>
 
 
 
-@model List<AnotherSetting>
+@*@model List<AnotherSetting>
 
-<img src="~/assets/images/logo/@Model.FirstOrDefault(s=>s.Key.ToLower().Trim() == "header logo").Value"/>
+<img src="~/assets/images/logo/@Model.FirstOrDefault(s=>s.Key.ToLower().Trim() == "header logo").Value"/>*@
