@@ -28,13 +28,46 @@ namespace AP204_Pronia.Services
             return setting;
         }
 
-        public BasketVM GetBasket()
+        public async Task<BasketVM> GetBasket()
         {
             string basketStr = _httpContext.HttpContext.Request.Cookies["Basket"];
-            //BasketVM basket = new BasketVM();
+            BasketVM basketData = new BasketVM();
             if (!string.IsNullOrEmpty(basketStr))
             {
-                BasketVM basketData = JsonConvert.DeserializeObject<BasketVM>(basketStr);
+                List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
+
+                
+                //List<Plant> query = await _context.Plants.Include(p=>p.PlantImages).ToListAsync();
+
+                var query = _context.Plants.Include(p => p.PlantImages).AsQueryable();
+
+                foreach (BasketCookieItemVM item in basket)
+                {
+                    Plant existedPlant = query.FirstOrDefault(p=>p.Id == item.Id);
+
+                    if(existedPlant != null)
+                    {
+
+                        BasketItemVM basketItem = new BasketItemVM
+                        {
+                            Plant = existedPlant,
+                            Count = item.Count
+                        };
+
+                        basketData.BasketItemVMs.Add(basketItem);
+
+                        
+                    }
+                }
+                decimal total = default;
+                foreach (BasketItemVM item in basketData.BasketItemVMs)
+                {
+                    total += item.Plant.Price * item.Count;
+                }
+                basketData.TotalPrice = total;
+                basketData.Count = basketData.BasketItemVMs.Count;
+
+                //BasketVM basketData = JsonConvert.DeserializeObject<BasketVM>(basketStr);
                 return basketData;
 
             }
