@@ -2,6 +2,7 @@
 using AP204_Pronia.Extensions;
 using AP204_Pronia.Models;
 using AP204_Pronia.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace AP204_Pronia.Areas.ProniaAdmin.Controllers
 {
     [Area("ProniaAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class PlantController : Controller
     {
         private readonly AppDbContext _context;

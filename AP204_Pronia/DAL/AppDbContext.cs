@@ -1,4 +1,6 @@
 ﻿using AP204_Pronia.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AP204_Pronia.DAL
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext: IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
@@ -19,6 +21,8 @@ namespace AP204_Pronia.DAL
             builder.Entity<AnotherSetting>()
                 .HasIndex(u => u.Key)
                 .IsUnique();
+            base.OnModelCreating(builder);
+           
         }
 
 

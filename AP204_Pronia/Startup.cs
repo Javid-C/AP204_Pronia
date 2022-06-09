@@ -1,8 +1,11 @@
 using AP204_Pronia.DAL;
+using AP204_Pronia.Hubs;
+using AP204_Pronia.Models;
 using AP204_Pronia.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +38,27 @@ namespace AP204_Pronia
                 opt.UseSqlServer(_configuration.GetConnectionString("Default"));
             });
 
+            services.AddIdentity<AppUser, IdentityRole>(option =>
+                {
+                    option.Password.RequireDigit = true;
+                    option.Password.RequireLowercase = true;
+                    option.Password.RequiredLength = 8;
+                    option.Password.RequireNonAlphanumeric = false;
+                    option.Password.RequireUppercase = false;
+
+                    option.Lockout.MaxFailedAccessAttempts = 3;
+                    option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    option.Lockout.AllowedForNewUsers = true;
+
+                    option.SignIn.RequireConfirmedEmail = false;
+
+                    option.User.RequireUniqueEmail = false;
+                    option.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnm_1234567890";
+                }
+            ).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddSignalR();
+
             services.AddHttpContextAccessor();
         }
 
@@ -48,10 +72,10 @@ namespace AP204_Pronia
 
             app.UseRouting();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-
                 endpoints.MapControllerRoute(
                   name: "areas",
                   pattern: "{area:exists}/{controller=dashboard}/{action=index}/{id?}"
@@ -60,6 +84,7 @@ namespace AP204_Pronia
                     name: "default",
                     pattern: "{controller=home}/{action=index}/{id?}"
                     );
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
